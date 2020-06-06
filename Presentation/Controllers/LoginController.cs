@@ -36,9 +36,8 @@ namespace Presentation.Controllers
 			        Email = loginModel.LoginEmail,
 			        Password = loginModel.LoginPassword
 		        };
-		        bool authorize = await _profileService.UserExist(userModelTemp);
 
-				if (authorize)
+				if (await _profileService.UserExist(userModelTemp))
 		        {
 			        FormsAuthentication.SetAuthCookie(loginModel.LoginEmail, true);
 			        Session["User"] = loginModel.LoginEmail;
