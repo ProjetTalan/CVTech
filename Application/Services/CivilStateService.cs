@@ -12,10 +12,6 @@ namespace Application.Services
 {
 	public class CivilStateService : ICivilStateService
 	{
-		public CivilStateService()
-		{
-			var unused = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-		}
 		public async Task<CivilStateModel> GetCivilStateByIdAsync(int? id)
 		{
 			using (ApplicationContext context = new ApplicationContext())

@@ -1,0 +1,41 @@
+﻿<script>
+	$(function () {
+		$('#SaveLogin').on('click', function () {
+
+			var data = JSON.stringify(GetUser());
+
+			$.ajax({
+				type: 'POST',
+				url: '@Url.Action("Identification", "Login")',
+				contentType: "application/json;",
+				data: data,
+				success: function (response) {
+					console.log(response.val);
+
+					if (response != false) {
+						window.location.href = "../Home/Index";
+						//$("#evalBody").html(response);
+						//CheckEnable();
+					}
+					//else
+					//    HandlingControllerError(response.Error);
+				},
+				error: function (response) {
+					//HandlingControllerError(response.responseText);
+					console.log(response.responseText);
+				}
+			});
+
+
+		});
+	});
+
+
+	function GetUser() {
+		var jsonObject = {
+			"LoginEmail": $("#loginEmail").val(),
+			"LoginPassword": $("#loginPassword").val(),
+		};
+		return jsonObject;
+	}
+</script>

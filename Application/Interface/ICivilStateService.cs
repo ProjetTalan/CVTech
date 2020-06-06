@@ -7,7 +7,6 @@ namespace Application.Interface
 	public interface ICivilStateService
 	{
 		Task<CivilStateModel> GetCivilStateByIdAsync(int? id);
-
 		Task<IEnumerable<CivilStateModel>> GetAllCivilStatesAsync();
 		Task<int> CreateAsync(CivilStateModel civilStateToAdd);
 		Task<int> UpdateAsync(int id, CivilStateModel civilStateToUpdate);

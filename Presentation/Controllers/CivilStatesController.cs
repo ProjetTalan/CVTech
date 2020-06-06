@@ -8,6 +8,7 @@ using Presentation.ViewModels;
 
 namespace Presentation.Controllers
 {
+	[AuthorizeCustom]
     public class CivilStatesController : Controller
     {
 	    private readonly ICivilStateService _civilStateService;

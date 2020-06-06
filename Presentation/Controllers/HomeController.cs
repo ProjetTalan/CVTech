@@ -4,6 +4,7 @@ namespace Presentation.Controllers
 {
 	public class HomeController : Controller
 	{
+		[AuthorizeCustom]
 		public ActionResult Index()
 		{
 			return View();
