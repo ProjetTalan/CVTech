@@ -16,8 +16,10 @@ namespace Presentation.ViewModels
 		[Required(ErrorMessage = "Please enter a valid address")]
 		[MaxLength(30), MinLength(10)]
 		public string Address { get; set; }
+
 		[Required(ErrorMessage = "Please enter a valid date")]
-		[DisplayFormat(DataFormatString = "{0:MM / dd / yyyy}", ApplyFormatInEditMode = true)]
+		[DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+		[DataType(DataType.Date)]
 		public DateTime? DateOfBirth { get; set; }
 	}
 }

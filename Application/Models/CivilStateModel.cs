@@ -11,7 +11,7 @@ namespace Application.Models
 		public string Address { get; set; }
 
 		[Required]
-		[DisplayFormat(DataFormatString = "{0:MM / dd / yyyy}", ApplyFormatInEditMode = true)]
+		[DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
 		public DateTime? DateOfBirth { get; set; }
 	}
 }
