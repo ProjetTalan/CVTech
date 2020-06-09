@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Application.Interface;
 using Application.Models;
+using Newtonsoft.Json;
 using Presentation.Models;
 
 namespace Presentation.Controllers
@@ -38,11 +39,17 @@ namespace Presentation.Controllers
 		        };
 
 				if (await _profileService.UserExist(userModelTemp))
-		        {
-			        FormsAuthentication.SetAuthCookie(loginModel.LoginEmail, true);
-			        Session["User"] = loginModel.LoginEmail;
+				{
+					var objectJson =
+						JsonConvert.SerializeObject(await _profileService.GetProfileByModelAsync(userModelTemp));
 
-			        return new JsonResult { Data = true, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+					FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, Constantes.Authent, DateTime.Now,
+														DateTime.Now.AddMinutes(30),
+														true, objectJson, FormsAuthentication.FormsCookiePath);
+
+					Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(ticket)));
+
+					return new JsonResult { Data = true, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 		        }
 
 		        return new JsonResult { Data = false, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

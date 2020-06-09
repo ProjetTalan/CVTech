@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Application.Models
+@using Domaine.Entities
+@using Newtonsoft.Json
+@{
+	ViewBag.Title = "Admin";
+}
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,7 +30,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Civil States", "Index", "CivilStates")</li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+	                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+	                <li>@Html.ActionLink("Admin Section", "Index", "Admin")</li>
                 </ul>
             </div>
         </div>

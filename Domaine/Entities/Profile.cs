@@ -8,7 +8,6 @@ namespace Domaine.Entities
 		Male,
 		Female
 	}
-
 	public enum Role
 	{
 		Consultant,
@@ -25,7 +24,7 @@ namespace Domaine.Entities
 		public DateTime DateOfBirth { get; set; }
 		public string Address { get; set; }
 		public string Zip { get; set; }
-		public int CityId { get; set; }
+		public int? CityId { get; set; }
 		public string PhoneNumber { get; set; }
 		[Required]
 		public string Email { get; set; }

@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using System.Web.Security;
+using Application.Models;
+using Newtonsoft.Json;
 
 namespace Presentation.Controllers
 {
@@ -7,6 +11,7 @@ namespace Presentation.Controllers
 		[AuthorizeCustom]
 		public ActionResult Index()
 		{
+
 			return View();
 		}
 

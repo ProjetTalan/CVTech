@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -28,7 +29,26 @@ namespace Application.Services
 						FirstName = x.FirstName,
 						LastName = x.LastName,
 						Email = x.Email,
-						Password = x.Password
+						Password = x.Password,
+						Role = x.Role
+					}).FirstOrDefaultAsync();
+			}
+		}
+
+		public async Task<ProfileModel> GetProfileByModelAsync(ProfileModel profilModel)
+		{
+			using (ApplicationContext context = new ApplicationContext())
+			{
+				return await context.Profiles
+					.Where(x => x.Email == profilModel.Email && x.Password == profilModel.Password)
+					.Select(x => new ProfileModel
+					{
+						Id = x.Id,
+						FirstName = x.FirstName,
+						LastName = x.LastName,
+						Email = x.Email,
+						Password = x.Password,
+						Role = x.Role
 					}).FirstOrDefaultAsync();
 			}
 		}
@@ -42,8 +62,9 @@ namespace Application.Services
 					Id = x.Id,
 					FirstName = x.FirstName,
 					LastName = x.LastName,
-					Email = x.Address,
-					Password = x.Password
+					Email = x.Email,
+					Password = x.Password,
+					Role = x.Role
 				}).ToListAsync();
 			}
 		}
@@ -57,7 +78,10 @@ namespace Application.Services
 					FirstName = profileToAdd.FirstName,
 					LastName = profileToAdd.LastName,
 					Email = profileToAdd.Email,
-					Password = profileToAdd.Password
+					Password = profileToAdd.Password,
+					Role = profileToAdd.Role,
+					//TODO changement de date pour une vrai valeur
+					DateOfBirth = DateTime.Today
 				};
 
 				context.Profiles.Add(toAdd);
@@ -78,7 +102,8 @@ namespace Application.Services
 					FirstName = profileToUpdate.FirstName,
 					LastName = profileToUpdate.LastName,
 					Email = profileToUpdate.Email,
-					Password = profileToUpdate.Password
+					Password = profileToUpdate.Password,
+					Role = profileToUpdate.Role
 				};
 				context.Profiles.AddOrUpdate(entity);
 				await context.SaveChangesAsync();

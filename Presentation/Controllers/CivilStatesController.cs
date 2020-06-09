@@ -8,7 +8,7 @@ using Presentation.ViewModels;
 
 namespace Presentation.Controllers
 {
-	[AuthorizeCustom]
+	[AuthorizeCustom("Admin", "Consultant", "Recruiter")]
     public class CivilStatesController : Controller
     {
 	    private readonly ICivilStateService _civilStateService;

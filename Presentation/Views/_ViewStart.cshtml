@@ -1,3 +1,22 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using Application.Models
+@using Domaine.Entities
+@using Newtonsoft.Json
+@{
+
+	FormsAuthenticationTicket ticket =
+		FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[".ASPXAUTH"]?.Value ?? throw new InvalidOperationException());
+	if (ticket != null)
+	{
+		ViewContext.ViewBag.Role = JsonConvert.DeserializeObject<ProfileModel>(ticket.UserData).Role.ToString();
+	}
+
+	if (ViewContext.ViewBag.Role == Role.Admin.ToString())
+	{
+		Layout = "~/Views/Shared/_Layout.cshtml";
+	}
+	else
+	{
+		Layout = "~/Views/Shared/_LayoutUser.cshtml";
+	}
+
 }
