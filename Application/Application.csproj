@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IExpService.cs" />
     <Compile Include="Interface\IProfileService.cs" />
     <Compile Include="Models\CivilStateModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />

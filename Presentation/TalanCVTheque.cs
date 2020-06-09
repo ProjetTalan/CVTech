@@ -4,16 +4,16 @@
     using System.Data.Entity;
     using System.Linq;
 
-    public class Model1 : DbContext
+    public class TalanCVTheque : DbContext
     {
-        // Votre contexte a été configuré pour utiliser une chaîne de connexion « Model1 » du fichier 
+        // Votre contexte a été configuré pour utiliser une chaîne de connexion « TalanCVTheque » du fichier 
         // de configuration de votre application (App.config ou Web.config). Par défaut, cette chaîne de connexion cible 
-        // la base de données « Presentation.Model1 » sur votre instance LocalDb. 
+        // la base de données « Presentation.TalanCVTheque » sur votre instance LocalDb. 
         // 
         // Pour cibler une autre base de données et/ou un autre fournisseur de base de données, modifiez 
-        // la chaîne de connexion « Model1 » dans le fichier de configuration de l'application.
-        public Model1()
-            : base("name=Model1")
+        // la chaîne de connexion « TalanCVTheque » dans le fichier de configuration de l'application.
+        public TalanCVTheque()
+            : base("name=TalanCVTheque")
         {
         }
 
