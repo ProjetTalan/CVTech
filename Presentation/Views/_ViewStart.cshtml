@@ -2,7 +2,6 @@
 @using Domaine.Entities
 @using Newtonsoft.Json
 @{
-	//TODO a corriger pour le cas si pas de cookie
 	if (HttpContext.Current.Request.Cookies[".ASPXAUTH"] != null)
 	{
 		FormsAuthenticationTicket ticket = null;

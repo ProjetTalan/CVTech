@@ -18,7 +18,6 @@ namespace Presentation.ViewModels
 		public string Address { get; set; }
 
 		[Required(ErrorMessage = "Please enter a valid date")]
-		[DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
 		[DataType(DataType.Date)]
 		public DateTime? DateOfBirth { get; set; }
 	}
