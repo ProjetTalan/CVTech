@@ -9,19 +9,19 @@ using Presentation.ViewModels;
 namespace Presentation.Controllers
 {
 	[AuthorizeCustom("Admin", "Consultant", "Recruiter")]
-    public class CivilStatesController : Controller
+    public class ProfileController : Controller
     {
-	    private readonly ICivilStateService _civilStateService;
-	    public CivilStatesController(ICivilStateService civilStateService)
+	    private readonly IProfileService _civilStateService;
+	    public ProfileController(IProfileService civilStateService)
 	    {
 		    _civilStateService = civilStateService;
 	    }
         // GET: CivilStates
         public async Task<ActionResult> Index()
         {
-            var indexVm = new IndexCivilStateViewModel
+            var indexVm = new IndexProfileViewModel
             {
-                CivilStates = new List<CivilStateModel>(await _civilStateService.GetAllCivilStatesAsync()) 
+                Profile = new List<ProfileModel>(await _civilStateService.GetAllProfilesAsync()) 
             };
             return View(indexVm);
         }
@@ -34,13 +34,13 @@ namespace Presentation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CivilStateModel tempModel = await _civilStateService.GetCivilStateByIdAsync(id);
+            ProfileModel tempModel = await _civilStateService.GetProfileByIdAsync(id);
 
             if (tempModel == null)
             {
 	            return HttpNotFound();
             }
-            var detailVm = new DetailsCivilStateViewModel
+            var detailVm = new DetailsProfileViewModel
             {
                 Id = tempModel.Id,
 	            Address = tempModel.Address,
@@ -55,7 +55,7 @@ namespace Presentation.Controllers
         // GET: CivilStates/Create
         public ActionResult Create()
         {
-            var addCivilVm = new AddCivilStateViewModel();
+            var addCivilVm = new AddProfileViewModel();
             return View(addCivilVm);
         }
 
@@ -64,11 +64,11 @@ namespace Presentation.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Address,DateOfBirth")] AddCivilStateViewModel civilState)
+        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Address,DateOfBirth")] AddProfileViewModel civilState)
         {
             if (ModelState.IsValid)
             {
-                var civilStateToAdd = new CivilStateModel
+                var ProfileToAdd = new ProfileModel
                 {
                     Address = civilState.Address,
                     DateOfBirth = civilState.DateOfBirth,
@@ -76,7 +76,7 @@ namespace Presentation.Controllers
                     LastName = civilState.LastName
                 };
 
-                await _civilStateService.CreateAsync(civilStateToAdd);
+                await _civilStateService.CreateAsync(ProfileToAdd);
                 return RedirectToAction("Index");
             }
 
@@ -91,14 +91,14 @@ namespace Presentation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CivilStateModel model = await _civilStateService.GetCivilStateByIdAsync(id);
+            ProfileModel model = await _civilStateService.GetProfileByIdAsync(id);
 
             if (model == null)
             {
                 return HttpNotFound();
             }
 
-            var civilStateToEdit = new EditCivilStateViewModel
+            var civilStateToEdit = new EditProfileViewModel
             {
                 Id = model.Id,
                 Address = model.Address,
@@ -115,11 +115,11 @@ namespace Presentation.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Address,DateOfBirth")] EditCivilStateViewModel civilState)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Address,DateOfBirth")] EditProfileViewModel civilState)
         {
             if (ModelState.IsValid)
             {
-	            var civilStateEdited = new CivilStateModel
+	            var ProfileEdited = new ProfileModel
 	            {
                     Id = civilState.Id,
 		            Address = civilState.Address,
@@ -128,7 +128,7 @@ namespace Presentation.Controllers
 		            LastName = civilState.LastName
 	            };
 
-	            await _civilStateService.UpdateAsync(civilStateEdited.Id, civilStateEdited);
+	            await _civilStateService.UpdateAsync(ProfileEdited.Id, ProfileEdited);
                 return RedirectToAction("Index");
             }
             return View(civilState);
@@ -142,14 +142,14 @@ namespace Presentation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CivilStateModel tempModel = await _civilStateService.GetCivilStateByIdAsync(id);
+            ProfileModel tempModel = await _civilStateService.GetProfileByIdAsync(id);
 
             if (tempModel == null)
             {
                 return HttpNotFound();
             }
 
-            var deleteVm = new DeleteCivilStateViewModel
+            var deleteVm = new DeleteProfileViewModel
             {
 	            Address = tempModel.Address,
 	            DateOfBirth = tempModel.DateOfBirth,
@@ -165,7 +165,7 @@ namespace Presentation.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-	        await _civilStateService.RemoveCivilStateAsync(id);
+	        await _civilStateService.RemoveProfileAsync(id);
             return RedirectToAction("Index");
         }
     }

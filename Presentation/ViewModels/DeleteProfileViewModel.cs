@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.ViewModels
 {
-	public class DeleteCivilStateViewModel
+	public class DeleteProfileViewModel
 	{
 		public string FirstName { get; set; }
 		public string LastName { get; set; }

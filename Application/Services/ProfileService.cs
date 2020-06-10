@@ -22,15 +22,15 @@ namespace Application.Services
 			using (ApplicationContext context = new ApplicationContext())
 			{
 				return await context.Profiles
-					.Where(x => x.Id == id)
+					.Where(x => x.ProfileID == id)
 					.Select(x => new ProfileModel
 					{
-						Id = x.Id,
+						Id = x.ProfileID,
 						FirstName = x.FirstName,
 						LastName = x.LastName,
 						Email = x.Email,
-						Password = x.Password,
-						Role = x.Role
+						Password = x.ProfilePassword,
+						Role = x.ProfileMainType
 					}).FirstOrDefaultAsync();
 			}
 		}
@@ -40,15 +40,15 @@ namespace Application.Services
 			using (ApplicationContext context = new ApplicationContext())
 			{
 				return await context.Profiles
-					.Where(x => x.Email == profilModel.Email && x.Password == profilModel.Password)
+					.Where(x => x.Email == profilModel.Email && x.ProfilePassword == profilModel.Password)
 					.Select(x => new ProfileModel
 					{
-						Id = x.Id,
+						Id = x.ProfileID,
 						FirstName = x.FirstName,
 						LastName = x.LastName,
 						Email = x.Email,
-						Password = x.Password,
-						Role = x.Role
+						Password = x.ProfilePassword,
+						Role = x.ProfileMainType
 					}).FirstOrDefaultAsync();
 			}
 		}
@@ -59,12 +59,12 @@ namespace Application.Services
 			{
 				return await context.Profiles.Select(x => new ProfileModel
 				{
-					Id = x.Id,
+					Id = x.ProfileID,
 					FirstName = x.FirstName,
 					LastName = x.LastName,
 					Email = x.Email,
-					Password = x.Password,
-					Role = x.Role
+					Password = x.ProfilePassword,
+					Role = x.ProfileMainType
 				}).ToListAsync();
 			}
 		}
@@ -73,13 +73,13 @@ namespace Application.Services
 		{
 			using (ApplicationContext context = new ApplicationContext())
 			{
-				Profile toAdd = new Profile
+				Profiles toAdd = new Profiles
 				{
 					FirstName = profileToAdd.FirstName,
 					LastName = profileToAdd.LastName,
 					Email = profileToAdd.Email,
-					Password = profileToAdd.Password,
-					Role = profileToAdd.Role,
+					ProfilePassword = profileToAdd.Password,
+					ProfileMainType = profileToAdd.Role,
 					//TODO changement de date pour une vrai valeur
 					DateOfBirth = DateTime.Today
 				};
@@ -87,7 +87,7 @@ namespace Application.Services
 				context.Profiles.Add(toAdd);
 				await context.SaveChangesAsync();
 
-				return toAdd.Id;
+				return toAdd.ProfileID;
 
 			}
 		}
@@ -96,19 +96,19 @@ namespace Application.Services
 		{
 			using (ApplicationContext context = new ApplicationContext())
 			{
-				Profile entity = new Profile
+				Profiles entity = new Profiles
 				{
-					Id = id,
+					ProfileID = id,
 					FirstName = profileToUpdate.FirstName,
 					LastName = profileToUpdate.LastName,
 					Email = profileToUpdate.Email,
-					Password = profileToUpdate.Password,
-					Role = profileToUpdate.Role
+					ProfilePassword = profileToUpdate.Password,
+					ProfileMainType = profileToUpdate.Role
 				};
 				context.Profiles.AddOrUpdate(entity);
 				await context.SaveChangesAsync();
 
-				return entity.Id;
+				return entity.ProfileID;
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace Application.Services
 		{
 			using (ApplicationContext context = new ApplicationContext())
 			{
-				Profile entity = await context.Profiles.FirstOrDefaultAsync(x => x.Id == profileId);
+				Profiles entity = await context.Profiles.FirstOrDefaultAsync(x => x.ProfileID == profileId);
 				if (entity != null)
 				{
 					context.Profiles.Remove(entity);
@@ -132,7 +132,7 @@ namespace Application.Services
 			using (ApplicationContext context = new ApplicationContext())
 			{
 				return await context.Profiles.AnyAsync(x =>
-					x.Email == profileToCheck.Email && x.Password == profileToCheck.Password);
+					x.Email == profileToCheck.Email && x.ProfilePassword == profileToCheck.Password);
 			}
 		}
 	}

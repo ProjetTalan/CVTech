@@ -145,7 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CivilStatesController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -154,14 +154,14 @@
     <Compile Include="Models\EnumModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AddCivilStateViewModel.cs" />
+    <Compile Include="ViewModels\AddProfileViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModels\CreateProfileViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModels\DetailsAdminViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModels\IndexAdminViewModel.cs" />
-    <Compile Include="ViewModels\DeleteCivilStateViewModel.cs" />
-    <Compile Include="ViewModels\DetailsCivilStateViewModel.cs" />
-    <Compile Include="ViewModels\EditCivilStateViewModel.cs" />
-    <Compile Include="ViewModels\IndexCivilStateViewModel.cs" />
+    <Compile Include="ViewModels\DeleteProfileViewModel.cs" />
+    <Compile Include="ViewModels\DetailsProfileViewModel.cs" />
+    <Compile Include="ViewModels\EditProfileViewModel.cs" />
+    <Compile Include="ViewModels\IndexProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -197,11 +197,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\CivilStates\Create.cshtml" />
-    <Content Include="Views\CivilStates\Delete.cshtml" />
-    <Content Include="Views\CivilStates\Details.cshtml" />
-    <Content Include="Views\CivilStates\Edit.cshtml" />
-    <Content Include="Views\CivilStates\Index.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Profile\Details.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -272,4 +272,11 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+  </Target>
 </Project>

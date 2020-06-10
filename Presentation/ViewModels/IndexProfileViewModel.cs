@@ -3,8 +3,8 @@ using Application.Models;
 
 namespace Presentation.ViewModels
 {
-	public class IndexCivilStateViewModel
+	public class IndexProfileViewModel
 	{
-		public IList<CivilStateModel> CivilStates { get; set; }
+		public IList<ProfileModel> Profile { get; set; }
 	}
 }
