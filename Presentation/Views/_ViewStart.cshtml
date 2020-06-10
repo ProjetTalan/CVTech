@@ -2,13 +2,18 @@
 @using Domaine.Entities
 @using Newtonsoft.Json
 @{
-
-	FormsAuthenticationTicket ticket =
-		FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[".ASPXAUTH"]?.Value ?? throw new InvalidOperationException());
-	if (ticket != null)
+	FormsAuthenticationTicket ticket;
+	if (System.Web.HttpContext.Current.Request.Cookies.AllKeys.Contains(".ASPXAUTH"))
 	{
-		ViewContext.ViewBag.Role = JsonConvert.DeserializeObject<ProfileModel>(ticket.UserData).Role.ToString();
+		ticket = 
+			FormsAuthentication.Decrypt(System.Web.HttpContext.Current.Request.Cookies[".ASPXAUTH"]?.Value ?? throw new InvalidOperationException());
+
+		if (ticket != null)
+		{
+			ViewContext.ViewBag.Role = JsonConvert.DeserializeObject<ProfileModel>(ticket.UserData).Role.ToString();
+		}
 	}
+
 
 	if (ViewContext.ViewBag.Role == Role.Admin.ToString())
 	{

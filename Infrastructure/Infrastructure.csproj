@@ -54,26 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
-<<<<<<< Updated upstream
-=======
-    <Compile Include="Migrations\202006041935570_InitialCreate.cs" />
-    <Compile Include="Migrations\202006041935570_InitialCreate.designer.cs">
-      <DependentUpon>202006041935570_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006061240162_added profil table.cs" />
-    <Compile Include="Migrations\202006061240162_added profil table.designer.cs">
-      <DependentUpon>202006061240162_added profil table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006061743523_test.cs" />
-    <Compile Include="Migrations\202006061743523_test.designer.cs">
-      <DependentUpon>202006061743523_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006091610321_Switch CityId to nullable.cs" />
-    <Compile Include="Migrations\202006091610321_Switch CityId to nullable.designer.cs">
-      <DependentUpon>202006091610321_Switch CityId to nullable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
->>>>>>> Stashed changes
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,23 +67,6 @@
       <Name>Domaine</Name>
     </ProjectReference>
   </ItemGroup>
-<<<<<<< Updated upstream
-=======
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006041935570_InitialCreate.resx">
-      <DependentUpon>202006041935570_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006061240162_added profil table.resx">
-      <DependentUpon>202006061240162_added profil table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006061743523_test.resx">
-      <DependentUpon>202006061743523_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006091610321_Switch CityId to nullable.resx">
-      <DependentUpon>202006091610321_Switch CityId to nullable.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
->>>>>>> Stashed changes
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
