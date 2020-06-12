@@ -53,7 +53,7 @@ namespace Domaine.Entities
         [StringLength(32)]
         public string ProfilePassword { get; set; }
 
-        public Role ProfileMainType { get; set; }
+        public Role? ProfileMainType { get; set; }
 
         [StringLength(32)]
         public string PhotoFileName { get; set; }
