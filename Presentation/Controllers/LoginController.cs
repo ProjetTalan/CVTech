@@ -36,7 +36,7 @@ namespace Presentation.Controllers
 				{
 			        Email = loginModel.LoginEmail,
 			        Password = loginModel.LoginPassword
-		        };
+				};
 
 				if (await _profileService.UserExist(userModelTemp))
 				{

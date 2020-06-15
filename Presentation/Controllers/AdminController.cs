@@ -68,7 +68,7 @@ namespace Presentation.Controllers
         // POST: Admin/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,Password,RoleNumber")] CreateProfileViewModel profileViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "FirstName,LastName,Email,Password,RoleNumber,DateOfBirth")] CreateProfileViewModel profileViewModel)
         {
 	        if (ModelState.IsValid)
 	        {
@@ -78,7 +78,8 @@ namespace Presentation.Controllers
 			        Role = (Role)profileViewModel.RoleNumber,
 			        FirstName = profileViewModel.FirstName,
 			        LastName = profileViewModel.LastName,
-                    Password = profileViewModel.Password
+                    Password = profileViewModel.Password,
+					DateOfBirth = profileViewModel.DateOfBirth
 		        };
 
 		        await _profileService.CreateAsync(profilToAdd);
@@ -89,47 +90,91 @@ namespace Presentation.Controllers
         }
 
         // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View();
-        }
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
+			ProfileModel profileModel = await _profileService.GetProfileByIdAsync(id);
+
+			if (profileModel == null)
+			{
+				return HttpNotFound();
+			}
+
+			var profileToEdit = new EditProfileViewModel()
+			{
+				Id = profileModel.Id,
+				Email = profileModel.Email,
+				Password = profileModel.Password,
+				RoleNumber = (int) profileModel.Role,
+				FirstName = profileModel.FirstName,
+				LastName = profileModel.LastName,
+				DateOfBirth = profileModel.DateOfBirth
+			};
+
+			return View(profileToEdit);
+		}
 
         // POST: Admin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+		public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,Email,Password,RoleNumber,DateOfBirth")] EditProfileViewModel profileModel)
         {
-            try
-            {
-                // TODO: Add update logic here
+			if (ModelState.IsValid)
+			{
+				var profileEdited = new ProfileModel
+				{
+					Id = profileModel.Id,
+					Email = profileModel.Email,
+					Password = profileModel.Password,
+					Role = (Role)profileModel.RoleNumber,
+					FirstName = profileModel.FirstName,
+					LastName = profileModel.LastName,
+					DateOfBirth = profileModel.DateOfBirth
+				};
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				await _profileService.UpdateAsync(profileEdited.Id, profileEdited);
+				return RedirectToAction("Index");
+			}
+			return View(profileModel);
+		}
 
         // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+	        if (id == null)
+	        {
+		        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        }
+
+	        ProfileModel tempModel = await _profileService.GetProfileByIdAsync(id);
+
+	        if (tempModel == null)
+	        {
+		        return HttpNotFound();
+	        }
+
+	        var deleteVm = new DeleteProfileViewModel
+	        {
+		        Email = tempModel.Email,
+		        RoleName = tempModel.RoleName,
+		        FirstName = tempModel.FirstName,
+		        LastName = tempModel.LastName
+            };
+
+	        return View(deleteVm);
         }
 
         // POST: Admin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+		public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+			await _profileService.RemoveProfileAsync(id);
+			return RedirectToAction("Index");
+		}
     }
 }

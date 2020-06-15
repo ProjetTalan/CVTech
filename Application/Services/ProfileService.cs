@@ -30,7 +30,8 @@ namespace Application.Services
 						LastName = x.LastName,
 						Email = x.Email,
 						Password = x.Password,
-						Role = x.Role
+						Role = x.Role,
+						DateOfBirth = x.DateOfBirth
 					}).FirstOrDefaultAsync();
 			}
 		}
@@ -80,8 +81,7 @@ namespace Application.Services
 					Email = profileToAdd.Email,
 					Password = profileToAdd.Password,
 					Role = profileToAdd.Role,
-					//TODO changement de date pour une vrai valeur
-					DateOfBirth = DateTime.Today
+					DateOfBirth = profileToAdd.DateOfBirth
 				};
 
 				context.Profiles.Add(toAdd);
@@ -103,7 +103,8 @@ namespace Application.Services
 					LastName = profileToUpdate.LastName,
 					Email = profileToUpdate.Email,
 					Password = profileToUpdate.Password,
-					Role = profileToUpdate.Role
+					Role = profileToUpdate.Role,
+					DateOfBirth = profileToUpdate.DateOfBirth
 				};
 				context.Profiles.AddOrUpdate(entity);
 				await context.SaveChangesAsync();

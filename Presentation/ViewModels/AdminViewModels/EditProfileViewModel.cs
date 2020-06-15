@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.ViewModels.AdminViewModels
 {
-	public class CreateProfileViewModel
+	public class EditProfileViewModel
 	{
-		//TODO que ça soit dans la view et ici
-
+		public int Id { get; set; }
 		[Required(ErrorMessage = "Please enter a valid first name")]
 		[MaxLength(30), MinLength(3)]
 		public string FirstName { get; set; }
@@ -26,9 +24,8 @@ namespace Presentation.ViewModels.AdminViewModels
 
 		public int RoleNumber { get; set; }
 
-		[Required(ErrorMessage = "Please enter a valid date")]
 		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
 		public DateTime DateOfBirth { get; set; }
-
 	}
 }

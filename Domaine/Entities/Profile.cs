@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domaine.Entities
 {
 	public enum Gender
 	{
-		Male,
-		Female
+		Male = 0,
+		Female = 1
 	}
 	public enum Role
 	{
-		Consultant,
-		Recruiter,
-		Admin
+		Consultant = 0,
+		Recruiter = 1,
+		Admin = 2
 	}
 	public class Profile
 	{
@@ -32,5 +33,7 @@ namespace Domaine.Entities
 		public string Password { get; set; }
 		public Role Role { get; set; }
 		public string PhotoUrl { get; set; }
+		public ICollection<ProExp> ProExps { get; set; }
+		public ICollection<ProfileTechnology> ProfileTechnologies { get; set; }
 	}
 }

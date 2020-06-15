@@ -42,8 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\CivilState.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\ExperienceDescription.cs" />
+    <Compile Include="Entities\Position.cs" />
+    <Compile Include="Entities\ProExp.cs" />
     <Compile Include="Entities\Profile.cs" />
+    <Compile Include="Entities\ProfileTechnology.cs" />
+    <Compile Include="Entities\TechLevel.cs" />
+    <Compile Include="Entities\Technology.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

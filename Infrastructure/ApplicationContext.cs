@@ -8,5 +8,14 @@ namespace Infrastructure
 		public ApplicationContext() : base("name=TalanCvTheque") {}
 		public DbSet<CivilState> CivilStates { get; set; }
 		public DbSet<Profile> Profiles { get; set; }
+		public DbSet<Company> Companies { get; set; }
+		public DbSet<City> Cities { get; set; }
+		public DbSet<Technology> Technologies { get; set; }
+		public DbSet<ProExp> ProExps { get; set; }
+		public DbSet<Country> Countries { get; set; }
+		public DbSet<ProfileTechnology> ProfileTechnologies { get; set; }
+		public DbSet<TechLevel> TechLevels { get; set; }
+		public DbSet<Position> Positions { get; set; }
+		public DbSet<ExperienceDescription> ExperienceDescriptions { get; set; }
 	}
 }

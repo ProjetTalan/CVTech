@@ -54,6 +54,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Migrations\202006111555563_initial.cs" />
+    <Compile Include="Migrations\202006111555563_initial.designer.cs">
+      <DependentUpon>202006111555563_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006111736533_fixed some table.cs" />
+    <Compile Include="Migrations\202006111736533_fixed some table.designer.cs">
+      <DependentUpon>202006111736533_fixed some table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006151138143_fixed change.cs" />
+    <Compile Include="Migrations\202006151138143_fixed change.designer.cs">
+      <DependentUpon>202006151138143_fixed change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006151317496_minor change.cs" />
+    <Compile Include="Migrations\202006151317496_minor change.designer.cs">
+      <DependentUpon>202006151317496_minor change.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +82,20 @@
       <Project>{3753e396-f9f1-481d-9006-85ab5fef5c35}</Project>
       <Name>Domaine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006111555563_initial.resx">
+      <DependentUpon>202006111555563_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006111736533_fixed some table.resx">
+      <DependentUpon>202006111736533_fixed some table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006151138143_fixed change.resx">
+      <DependentUpon>202006151138143_fixed change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006151317496_minor change.resx">
+      <DependentUpon>202006151317496_minor change.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
