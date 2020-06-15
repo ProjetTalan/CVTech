@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.ViewModels.AdminViewModels
@@ -22,6 +23,7 @@ namespace Presentation.ViewModels.AdminViewModels
 
 		[Required(ErrorMessage = "Please enter a valid address")]
 		[MaxLength(30), MinLength(10)]
+		[PasswordPropertyText]
 		public string Password { get; set; }
 
 		public int RoleNumber { get; set; }

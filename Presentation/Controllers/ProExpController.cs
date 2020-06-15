@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -55,9 +56,30 @@ namespace Presentation.Controllers
         }
 
         // GET: ProExp/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int? id)
         {
-            return View();
+	        if (id == null)
+	        {
+		        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        }
+
+	        ProExpModel proExpModel = await _proExpService.GetProExpByIdAsync(id.Value);
+
+	        if (proExpModel == null)
+	        {
+		        return HttpNotFound();
+	        }
+
+	        var detailVm = new DetailsProExpViewModel
+	        {
+                CityName = proExpModel.CityName,
+                CompanyName = proExpModel.CompanyName,
+                FromDate = proExpModel.FromDate,
+                ToDate = proExpModel.ToDate,
+                ProfileTechModels = new List<ProfileTechModel>(await _proExpService.GetAllTechnoFrom(proExpModel))
+	        };
+
+	        return View(detailVm);
         }
 
         // GET: ProExp/Create

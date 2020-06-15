@@ -13,5 +13,6 @@ namespace Domaine.Entities
 		public int TechnologyId { get; set; }
 		public Technology Technology { get; set; }
 		public int TechLevelId { get; set; }
+		public TechLevel TechLevel { get; set; }
 	}
 }
