@@ -94,6 +94,7 @@ namespace Application.Services
 					.Where(x => x.ProfileId == profileModel.Id)
 					.Select(x => new ProExpModel
 					{
+						Id = x.Id,
 						CityName = x.City.Name,
 						CompanyName = x.Company.Name,
 						FromDate = x.FromDate,
@@ -102,35 +103,41 @@ namespace Application.Services
 			}
 		}
 
-		//public async Task<IEnumerable<ProfileTechModel>> GetAllTechnoFrom(ProExpModel proExpModel)
-		//{
-		//	using (ApplicationContext context = new ApplicationContext())
-		//	{
-		//		var data = await context.ProExps
-		//			.Where(x => x.Id == proExpModel.Id)
-		//			.SelectMany(x => x.Technologies).Join(
-		//				context.ProfileTechnologies,
-		//				proExpTech => proExpTech.Id,
-		//				profileTech => profileTech.TechnologyId,
-		//				(proExpTech, profileTech) => new ProfileTechModel()
-		//				{
-		//					TechLevelId = proExpTech.Id,
-		//					Title = proExpTech.Title,
-		//					ProfileId = profileTech.ProfileId,
-		//					TechnologyId = profileTech.TechnologyId
-		//				}).ToListAsync();
+		public async Task<ProExpModel> GetProExpByIdAsync(int id)
+		{
+			using (ApplicationContext context = new ApplicationContext())
+			{
+				return await context.ProExps.Where(x => x.Id == id).Select(x => new ProExpModel
+				{
+					Id = id,
+					CompanyName = x.Company.Name,
+					CityName = x.City.Name,
+					FromDate = x.FromDate,
+					ToDate = x.ToDate
+				}).SingleOrDefaultAsync();
+			}
+		}
 
+		public async Task<IEnumerable<ProfileTechModel>> GetAllTechnoFrom(ProExpModel proExpModel)
+		{
+			using (ApplicationContext context = new ApplicationContext())
+			{
+				return await context.ProExps
+					.Where(x => x.Id == proExpModel.Id)
+					.SelectMany(x => x.Technologies).Join(
+						context.ProfileTechnologies,
+						proExpTech => proExpTech.Id,
+						profileTech => profileTech.TechnologyId,
+						(proExpTech, profileTech) => new ProfileTechModel()
+						{
+							TechnologyName = proExpTech.Title,
+							TechLevelId = profileTech.TechLevelId,
+							TechLevelDescription = profileTech.TechLevel.Description,
+							ProfileId = profileTech.ProfileId,
+							TechnologyId = profileTech.TechnologyId
+						}).ToListAsync();
+			}
+		}
 
-		//		return data;
-
-		//		//return await context.ProExps
-		//		//	.Where(x => x.Id == proExpModel.Id)
-		//		//	.SelectMany(x => x.Technologies).Select(x => new TechnologyModel
-		//		//	{
-		//		//		Title = x.Title,
-		//		//		Id = x.Id
-		//		//	}).ToListAsync();
-		//	}
-		//}
 	}
 }

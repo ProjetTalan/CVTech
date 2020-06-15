@@ -9,5 +9,9 @@ namespace Application.Interface
 		Task<int> CreateAsync(ProExpModel proExpModel);
 
 		Task<IEnumerable<ProExpModel>> GetAllProExpFrom(ProfileModel profileModel);
+
+		Task<ProExpModel> GetProExpByIdAsync(int id);
+
+		Task<IEnumerable<ProfileTechModel>> GetAllTechnoFrom(ProExpModel proExpModel);
 	}
 }

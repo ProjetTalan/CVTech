@@ -165,6 +165,7 @@
     <Compile Include="ViewModels\EditCivilStateViewModel.cs" />
     <Compile Include="ViewModels\IndexCivilStateViewModel.cs" />
     <Compile Include="ViewModels\ProExpViewModels\CreateProExpViewModel.cs" />
+    <Compile Include="ViewModels\ProExpViewModels\DetailsProExpViewModel.cs" />
     <Compile Include="ViewModels\ProExpViewModels\IndexProExpViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +211,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\ProExp\Index.cshtml" />
     <Content Include="Views\ProExp\Create.cshtml" />
+    <Content Include="Views\ProExp\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
