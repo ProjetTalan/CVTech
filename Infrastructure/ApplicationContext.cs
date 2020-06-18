@@ -16,5 +16,8 @@ namespace Infrastructure
 		public DbSet<TechLevel> TechLevels { get; set; }
 		public DbSet<Position> Positions { get; set; }
 		public DbSet<ExperienceDescription> ExperienceDescriptions { get; set; }
+		public DbSet<Fluency> Fluencies { get; set; }
+		public DbSet<LanguageFluencies> LanguageFluencies { get; set; }
+		public DbSet<Languages> Languages { get; set; }
 	}
 }

@@ -21,23 +21,23 @@ namespace Domaine.Entities
         [ForeignKey("LanguageID"), Required]
         virtual public Languages Languages { get; set; }
 
-        public int ConversationFluencyID { get; set;}
+        public int? ConversationFluencyID { get; set;}
         [ForeignKey("ConversationFluencyID")]
         virtual public Fluency ConversationFluency { get; set; }
 
-        public int SpokenFluencyID { get; set; }
+        public int? SpokenFluencyID { get; set; }
         [ForeignKey("SpokenFluencyID")]
         virtual public Fluency SpokenFluency { get; set; }
 
-        public int TechnicalVocabFluencyID { get; set; }
+        public int? TechnicalVocabFluencyID { get; set; }
         [ForeignKey("TechnicalVocabFluencyID")]
         virtual public Fluency TechnicalVocabFluency { get; set; }
 
-        public int WrittenExpressionFluencyID { get; set; }
+        public int? WrittenExpressionFluencyID { get; set; }
         [ForeignKey("WrittenExpressionFluencyID")]
         virtual public Fluency WrittenExpressionFluency { get; set; }
 
-        public int WrittenComprehensionFluencyID { get; set; }
+        public int? WrittenComprehensionFluencyID { get; set; }
         [ForeignKey("WrittenComprehensionFluencyID")]
         virtual public Fluency WrittenComprehensionFluency { get; set; }
     }

@@ -13,6 +13,7 @@ namespace Application.Models
 		public DateTime DateOfBirth { get; set; }
 		public Role Role { get; set; }
 		public string ImageUrl { get; set; }
+		public Gender Gender { get; set; }
 
 		public string RoleName
 		{
