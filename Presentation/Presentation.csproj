@@ -198,6 +198,7 @@
     <Content Include="Views\ProExp\Details.cshtml" />
     <Content Include="Views\ProExp\Edit.cshtml" />
     <Content Include="Views\ProExp\Delete.cshtml" />
+    <Content Include="Views\Admin\_Script.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,14 +4,17 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>*@
 
 <div>
-	<h4>Profile</h4>
-    <hr />
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="detailsModalLabel">Profile</h4>
+    </div>
+    <br/>
     <dl class="dl-horizontal">
         <dt>
-	        @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
         <dd>
@@ -27,7 +30,7 @@
         </dd>
 
         <dt>
-	        @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
@@ -44,7 +47,5 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@Html.Partial("_Script")
