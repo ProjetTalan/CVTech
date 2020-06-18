@@ -173,7 +173,7 @@ namespace Presentation.Controllers
         [ValidateAntiForgeryToken]
 		public async Task<ActionResult> DeleteConfirmed(int id)
         {
-			await _profileService.RemoveProfileAsync(id);
+			await _profileService.RemoveAsync(id);
 			return RedirectToAction("Index");
 		}
     }

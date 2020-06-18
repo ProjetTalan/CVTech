@@ -113,7 +113,7 @@ namespace Application.Services
 			}
 		}
 
-		public async Task<bool> RemoveProfileAsync(int profileId)
+		public async Task<bool> RemoveAsync(int profileId)
 		{
 			using (ApplicationContext context = new ApplicationContext())
 			{

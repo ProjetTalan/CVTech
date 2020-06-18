@@ -18,7 +18,7 @@ namespace Presentation.Controllers
     {
 	    // GET: ProExp
 	    private IProExpService _proExpService;
-	    private ProfileModel _userProExp;
+	    private ProfileModel _userModel;
 
 	    public ProExpController(IProExpService proExpService)
 	    {
@@ -41,7 +41,7 @@ namespace Presentation.Controllers
 
 				    if (ticket != null)
 				    {
-					    _userProExp = JsonConvert.DeserializeObject<ProfileModel>(ticket.UserData);
+					    _userModel = JsonConvert.DeserializeObject<ProfileModel>(ticket.UserData);
 				    }
 			    }
 		    }
@@ -50,7 +50,7 @@ namespace Presentation.Controllers
         {
             var indexVm = new IndexProExpViewModel
             {
-                ProExpModels = new List<ProExpModel>(await _proExpService.GetAllProExpFrom(_userProExp)) 
+                ProExpModels = new List<ProExpModel>(await _proExpService.GetAllProExpFrom(_userModel)) 
             };
             return View(indexVm);
         }
@@ -102,7 +102,7 @@ namespace Presentation.Controllers
                     CityName = proExpViewModel.CityName,
                     FromDate = proExpViewModel.FromDate,
                     ToDate = proExpViewModel.ToDate,
-                    ProfileId = _userProExp.Id
+                    ProfileId = _userModel.Id
                 };
 
 		        await _proExpService.CreateAsync(proExpToAdd);
@@ -113,47 +113,87 @@ namespace Presentation.Controllers
         }
 
         // GET: ProExp/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View();
+	        if (id == null)
+	        {
+		        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        }
+
+
+	        var proExpModel = await _proExpService.GetProExpByIdAsync(id.Value);
+
+	        if (proExpModel == null)
+	        {
+		        return HttpNotFound();
+	        }
+
+	        var proExptoEdit = new EditProExpViewModel
+	        {
+                CityName = proExpModel.CityName,
+                CompanyName = proExpModel.CompanyName,
+                FromDate = proExpModel.FromDate,
+                ToDate = proExpModel.ToDate
+	        };
+            return View(proExptoEdit);
         }
 
-        // POST: ProExp/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+		// POST: ProExp/Edit/5
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> Edit([Bind(Include = "CompanyName, CityName, FromDate, ToDate")] EditProExpViewModel proExpViewModel)
+		{
+			if (ModelState.IsValid)
+			{
+				var proExpEdited = new ProExpModel
+				{
+					Id = proExpViewModel.Id,
+					CityName = proExpViewModel.CityName,
+					CompanyName = proExpViewModel.CompanyName,
+					FromDate = proExpViewModel.FromDate,
+					ToDate = proExpViewModel.ToDate
+				};
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				await _proExpService.UpdateAsync(proExpEdited.Id, proExpEdited);
+				return RedirectToAction("Index");
+			}
+			return View(proExpViewModel);
+		}
 
-        // GET: ProExp/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+		// GET: ProExp/Delete/5
+		public async Task<ActionResult> Delete(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
 
-        // POST: ProExp/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+			ProExpModel proExpModel = await _proExpService.GetProExpByIdAsync(id.Value);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+			if (proExpModel == null)
+			{
+				return HttpNotFound();
+			}
+
+			var deleteVm = new DeleteProExpViewModel
+			{
+				FromDate = proExpModel.FromDate,
+				ToDate = proExpModel.ToDate,
+				CityName = proExpModel.CityName,
+				CompanyName = proExpModel.CompanyName,
+				ProfileTechModels = new List<ProfileTechModel>(await _proExpService.GetAllTechnoFrom(proExpModel)) 
+			};
+
+			return View(deleteVm);
+		}
+
+		// POST: Admin/Delete/5
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> DeleteConfirmed(int id)
+		{
+			await _proExpService.RemoveAsync(id);
+			return RedirectToAction("Index");
+		}
+	}
 }

@@ -10,7 +10,7 @@ namespace Application.Interface
 		Task<IEnumerable<ProfileModel>> GetAllProfilesAsync();
 		Task<int> CreateAsync(ProfileModel profilModelToAdd);
 		Task<int> UpdateAsync(int id, ProfileModel profilModelToUpdate);
-		Task<bool> RemoveProfileAsync(int profilModelId);
+		Task<bool> RemoveAsync(int profilModelId);
 		Task<bool> UserExist(ProfileModel profileToCheck);
 		Task<ProfileModel> GetProfileByModelAsync(ProfileModel profilModel);
 	}

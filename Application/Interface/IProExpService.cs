@@ -13,5 +13,8 @@ namespace Application.Interface
 		Task<ProExpModel> GetProExpByIdAsync(int id);
 
 		Task<IEnumerable<ProfileTechModel>> GetAllTechnoFrom(ProExpModel proExpModel);
+
+		Task<int> UpdateAsync(int id, ProExpModel proExpToUpdate);
+		Task<bool> RemoveAsync(int id);
 	}
 }

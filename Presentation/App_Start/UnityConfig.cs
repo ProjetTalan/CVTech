@@ -12,7 +12,6 @@ namespace Presentation
         {
 			var container = new UnityContainer();
 
-			container.RegisterType<ICivilStateService, CivilStateService>();
 			container.RegisterType<IProfileService, ProfileService>();
 			container.RegisterType<IProExpService, ProExpService>();
             // register all your components with the container here

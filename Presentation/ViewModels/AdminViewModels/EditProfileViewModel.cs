@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.ViewModels.AdminViewModels
@@ -14,12 +15,11 @@ namespace Presentation.ViewModels.AdminViewModels
 		[MaxLength(30), MinLength(3)]
 		public string LastName { get; set; }
 
-		[Required(ErrorMessage = "Please enter a valid address")]
 		[MaxLength(30), MinLength(10)]
 		public string Email { get; set; }
 
-		[Required(ErrorMessage = "Please enter a valid address")]
-		[MaxLength(30), MinLength(10)]
+		[MaxLength(64), MinLength(6)]
+		[PasswordPropertyText]
 		public string Password { get; set; }
 
 		public int RoleNumber { get; set; }

@@ -74,6 +74,10 @@
     <Compile Include="Migrations\202006151458400_Add navigation property.designer.cs">
       <DependentUpon>202006151458400_Add navigation property.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006161953260_remove example CivilState.cs" />
+    <Compile Include="Migrations\202006161953260_remove example CivilState.designer.cs">
+      <DependentUpon>202006161953260_remove example CivilState.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006151458400_Add navigation property.resx">
       <DependentUpon>202006151458400_Add navigation property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006161953260_remove example CivilState.resx">
+      <DependentUpon>202006161953260_remove example CivilState.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,7 @@
 			{
 				ticket = FormsAuthentication.Decrypt(toDecrypt);
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				Layout = "~/Views/Login/Index.cshtml";
 			}

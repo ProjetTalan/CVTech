@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\City.cs" />
-    <Compile Include="Entities\CivilState.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\ExperienceDescription.cs" />

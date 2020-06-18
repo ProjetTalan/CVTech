@@ -55,14 +55,11 @@
     <Compile Include="Interface\IExpDescriptionService.cs" />
     <Compile Include="Interface\IProExpService.cs" />
     <Compile Include="Interface\IProfileService.cs" />
-    <Compile Include="Models\CivilStateModel.cs" />
     <Compile Include="Models\ExperienceDescriptionModel.cs" />
     <Compile Include="Models\ProExpModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\ProfileTechModel.cs" />
     <Compile Include="Models\TechnologyModel.cs" />
-    <Compile Include="Services\CivilStateService.cs" />
-    <Compile Include="Interface\ICivilStateService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ExpDescriptionService.cs" />
     <Compile Include="Services\ProExpService.cs" />
