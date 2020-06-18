@@ -76,7 +76,8 @@ namespace Presentation.Controllers
                 CompanyName = proExpModel.CompanyName,
                 FromDate = proExpModel.FromDate,
                 ToDate = proExpModel.ToDate,
-                ProfileTechModels = new List<ProfileTechModel>(await _proExpService.GetAllTechnoFrom(proExpModel))
+                ProfileTechModels = new List<ProfileTechModel>(await _proExpService.GetAllTechnoFrom(proExpModel)),
+				ExperienceDescriptionModel = proExpModel.ExperienceDescriptionModel
 	        };
 
 	        return View(detailVm);
