@@ -93,7 +93,8 @@ namespace Presentation.Controllers
         // POST: ProExp/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CompanyName, CityName, FromDate, ToDate")] CreateProExpViewModel proExpViewModel)
+        public async Task<ActionResult> Create(
+	        [Bind(Include = "CompanyName, CityName, FromDate, ToDate, ProExpDescription, ProExpName, ProExpPosition")] CreateProExpViewModel proExpViewModel)
         {
 	        if (ModelState.IsValid)
 	        {
@@ -106,7 +107,17 @@ namespace Presentation.Controllers
                     ProfileId = _userModel.Id
                 };
 
-		        await _proExpService.CreateAsync(proExpToAdd);
+                var expProDesc = new ExperienceDescriptionModel
+                {
+	                Description = proExpViewModel.ProExpDescription,
+	                PositionDesc = proExpViewModel.ProExpPosition,
+	                Name = proExpViewModel.ProExpName
+                };
+
+                proExpToAdd.ExperienceDescriptionModel = expProDesc;
+
+
+				await _proExpService.CreateAsync(proExpToAdd);
 		        return RedirectToAction("Index");
 	        }
 
