@@ -1,10 +1,9 @@
 ﻿using System.Data.Entity;
-using Application.Interface;
 using Domaine.Entities;
 
 namespace Infrastructure
 {
-	public class ApplicationContext : DbContext, IApplicationContext
+	public class ApplicationContext : DbContext
 	{
 		public ApplicationContext() : base("name=TalanCvTheque") {}
 		public DbSet<Profile> Profiles { get; set; }

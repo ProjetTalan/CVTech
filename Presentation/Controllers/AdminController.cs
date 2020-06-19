@@ -31,34 +31,34 @@ namespace Presentation.Controllers
 	        return View(indexVm);
         }
 
-		// GET: Admin/Details/5
-		public async Task<ActionResult> Details(int? id)
+        // GET: Admin/Details/5
+        public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        if (id == null)
+	        {
+		        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        }
+
+	        ProfileModel profileModel = await _profileService.GetProfileByIdAsync(id);
+
+	        if (profileModel == null)
+	        {
+		        return HttpNotFound();
             }
 
-            ProfileModel profileModel = await _profileService.GetProfileByIdAsync(id);
-
-            if (profileModel == null)
-            {
-                return HttpNotFound();
-            }
-
-            var detailVm = new DetailsAdminViewModel()
-            {
-                Id = profileModel.Id,
-                Email = profileModel.Email,
-                RoleName = profileModel.RoleName,
-                FirstName = profileModel.FirstName,
-                LastName = profileModel.LastName
-            };
-            return PartialView("Details", detailVm);
+	        var detailVm = new DetailsAdminViewModel()
+	        {
+		        Id = profileModel.Id,
+		        Email = profileModel.Email,
+		        RoleName = profileModel.RoleName,
+		        FirstName = profileModel.FirstName,
+		        LastName = profileModel.LastName
+	        };
+	        return View(detailVm);
         }
 
-		// GET: Admin/Create
-		public ActionResult Create()
+        // GET: Admin/Create
+        public ActionResult Create()
         {
 	        var createProfilViewModel = new CreateProfileViewModel();
 

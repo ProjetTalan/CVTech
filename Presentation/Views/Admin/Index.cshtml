@@ -11,9 +11,9 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfileModels[0].FirstName)
-        </th>
+		<th>
+			@Html.DisplayNameFor(model => model.ProfileModels[0].FirstName)
+		</th>
         <th>
             @Html.DisplayNameFor(model => model.ProfileModels[0].LastName)
         </th>
@@ -26,37 +26,26 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model.ProfileModels)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoleName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                <a href="javascript:void(0);" class="anchorDetail" data-id="@item.Id">Details</a>|
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-    
-    <div id='detailsModal' class='modal'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id='detailsModalContent'></div>
-            </div>
-        </div>
-    </div>
+@foreach (var item in Model.ProfileModels) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
 
 </table>
-
-@Html.Partial("_Script")

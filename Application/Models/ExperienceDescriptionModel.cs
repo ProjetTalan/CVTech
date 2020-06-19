@@ -4,7 +4,7 @@ namespace Application.Models
 {
 	public class ExperienceDescriptionModel
 	{
-		public int? Id { get; set; }
+		public int Id { get; set; }
 		public int ProExpId { get; set; }
 		public string PositionDesc { get; set; }
 		public string Name { get; set; }

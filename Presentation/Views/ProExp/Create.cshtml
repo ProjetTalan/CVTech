@@ -47,29 +47,6 @@
 			@Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
 		</div>
 	</div>
-
-	<div class="form-group">
-		@Html.LabelFor(model => model.ProExpName, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.ProExpName, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.ProExpName, "", new { @class = "text-danger" })
-		</div>
-	</div>
-
-	<div class="form-group">
-		@Html.LabelFor(model => model.ProExpPosition, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10">
-			@Html.EditorFor(model => model.ProExpPosition, new { htmlAttributes = new { @class = "form-control" } })
-			@Html.ValidationMessageFor(model => model.ProExpPosition, "", new { @class = "text-danger" })
-		</div>
-	</div>
-	
-	<div class="form-group">
-		@Html.LabelFor(model => model.ProExpDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-		<div class="col-md-10" >
-			@Html.TextAreaFor(model => model.ProExpDescription)
-		</div>
-	</div>
 	<div class="form-group">
 		<div class="col-md-offset-2 col-md-10">
 			<input type="submit" value="Create" class="btn btn-default" />

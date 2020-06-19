@@ -15,11 +15,5 @@ namespace Presentation.ViewModels.ProExpViewModels
 
 		public string CompanyName { get; set; }
 		public string CityName { get; set; }
-
-		[DataType(DataType.MultilineText)]
-		public string ProExpDescription { get; set; }
-		public string ProExpPosition { get; set; }
-
-		public string ProExpName { get; set; }
 	}
 }
