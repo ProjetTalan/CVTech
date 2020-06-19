@@ -116,6 +116,24 @@ namespace Application.Services
 			ProExp entity = await _dbContext.ProExps.FirstOrDefaultAsync(x => x.Id == id);
 			if (entity != null)
 			{
+				var profileTechnologies = 
+					await _dbContext.ProExps
+					.Where(x => x.Id == id)
+					.SelectMany(x => x.Technologies)
+					.Join(_dbContext.ProfileTechnologies,
+						techFromProExp => techFromProExp.Id,
+						profileTech => profileTech.TechnologyId,
+						(proExpTech, profileTech) => new ProfileTechnology()
+						{
+							ProfileId = profileTech.ProfileId,
+							TechnologyId = profileTech.TechnologyId
+						})
+						.ToListAsync();
+
+				foreach (var profileTechnology in profileTechnologies)
+				{
+					_dbContext.ProfileTechnologies.Remove(profileTechnology);
+				}
 				_dbContext.ProExps.Remove(entity);
 			}
 
@@ -246,18 +264,5 @@ namespace Application.Services
 				})
 				.ToListAsync();
 		}
-
-		//TODO check le comportement de l'update de l'exp pro ou du remove, savoir si le delete est bien en cascade ou non
-		//private async Task<bool> RemoveExpDescriptionByIdAsync(int id)
-		//{
-		//		ExperienceDescription entity = await _dbContext.ExperienceDescriptions.FirstOrDefaultAsync(x => x.Id == id);
-		//		if (entity != null)
-		//		{
-		//			_dbContext.ExperienceDescriptions.Remove(entity);
-		//		}
-
-		//		await _dbContext.SaveChangesAsync();
-		//		return true;
-		//}
 	}
 }
