@@ -21,14 +21,33 @@ namespace Presentation.Controllers
 	    {
 		    _profileService = profileService;
 	    }
-        // GET: Admin
-        public async Task<ActionResult> Index()
+		// GET: Admin
+		public async Task<ActionResult> Index(string sortOrder)
         {
-	        var indexVm = new IndexAdminViewModel()
-	        {
-		        ProfileModels = new List<ProfileModel>(await _profileService.GetAllProfilesAsync())
-	        };
-	        return View(indexVm);
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "";
+            ViewBag.EmailSortParm = String.IsNullOrEmpty(sortOrder) ? "email_desc" : "";
+            var indexVm = new IndexAdminViewModel()
+            {
+                ProfileModels = new List<ProfileModel>(await _profileService.GetAllProfilesAsync())
+
+            };
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    indexVm.ProfileModels = indexVm.ProfileModels.OrderByDescending(s => s.LastName).ToList();
+                    break;
+                case "firstname_desc":
+                    indexVm.ProfileModels = indexVm.ProfileModels.OrderByDescending(s => s.FirstName).ToList();
+                    break;
+                case "email_desc":
+                    indexVm.ProfileModels = indexVm.ProfileModels.OrderByDescending(s => s.Email).ToList();
+                    break;
+                default:
+                    indexVm.ProfileModels = indexVm.ProfileModels.OrderBy(s => s.FirstName).ToList();
+                    break;
+            }
+            return View(indexVm);
         }
 
 		// GET: Admin/Details/5

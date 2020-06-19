@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProfileModels[0].FirstName)
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProfileModels[0].LastName)
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProfileModels[0].Email)
+            @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProfileModels[0].RoleName)
+            Role
         </th>
         <th></th>
     </tr>
@@ -48,7 +48,7 @@
             </td>
         </tr>
     }
-    
+
     <div id='detailsModal' class='modal'>
         <div class="modal-dialog">
             <div class="modal-content">
