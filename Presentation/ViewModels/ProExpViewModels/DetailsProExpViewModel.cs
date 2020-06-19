@@ -16,6 +16,7 @@ namespace Presentation.ViewModels.ProExpViewModels
 		public DateTime ToDate { get; set; }
 
 		public ExperienceDescriptionModel ExperienceDescriptionModel { get; set; }
+		public IList<ExperienceDescriptionModel> ExperienceDescriptionModels { get; set; }
 		public IList<ProfileTechModel> ProfileTechModels { get; set; }
 	}
 }

@@ -19,7 +19,7 @@ namespace Application.Models
         [Display(Name = "To date")]
 		public DateTime ToDate { get; set; }
 
-		public ExperienceDescriptionModel ExperienceDescriptionModel { get; set; }
+		public IList<ExperienceDescriptionModel> ExperienceDescriptionModel { get; set; }
 		public IList<TechnologyModel> TechnologyModels { get; set; }
 
 	}
