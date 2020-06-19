@@ -49,6 +49,7 @@
     <Compile Include="Entities\Fluency.cs" />
     <Compile Include="Entities\LanguageFluencies.cs" />
     <Compile Include="Entities\Languages.cs" />
+    <Compile Include="Entities\Nationalities.cs" />
     <Compile Include="Entities\Position.cs" />
     <Compile Include="Entities\ProExp.cs" />
     <Compile Include="Entities\Profile.cs" />

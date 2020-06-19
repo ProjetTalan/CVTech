@@ -54,6 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Migrations\202006181638212_Initial.cs" />
+    <Compile Include="Migrations\202006181638212_Initial.designer.cs">
+      <DependentUpon>202006181638212_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006190831509_Add exp desc list to pro exp.cs" />
+    <Compile Include="Migrations\202006190831509_Add exp desc list to pro exp.designer.cs">
+      <DependentUpon>202006190831509_Add exp desc list to pro exp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,10 +70,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj">
+      <Project>{5655A933-2C82-46C1-B1FC-1350197FC6A8}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domaine\Domaine.csproj">
       <Project>{3753e396-f9f1-481d-9006-85ab5fef5c35}</Project>
       <Name>Domaine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006181638212_Initial.resx">
+      <DependentUpon>202006181638212_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006190831509_Add exp desc list to pro exp.resx">
+      <DependentUpon>202006190831509_Add exp desc list to pro exp.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

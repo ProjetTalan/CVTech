@@ -52,19 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\IExpDescriptionService.cs" />
-    <Compile Include="Interface\ILanguageService.cs" />
+    <Compile Include="Interface\IApplicationContext.cs" />
     <Compile Include="Interface\IProExpService.cs" />
     <Compile Include="Interface\IProfileService.cs" />
     <Compile Include="Models\ExperienceDescriptionModel.cs" />
-    <Compile Include="Models\LanguageFluenciesModel.cs" />
     <Compile Include="Models\ProExpModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\ProfileTechModel.cs" />
     <Compile Include="Models\TechnologyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ExpDescriptionService.cs" />
-    <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ProExpService.cs" />
     <Compile Include="Services\ProfileService.cs" />
   </ItemGroup>
@@ -79,10 +75,6 @@
     <ProjectReference Include="..\Domaine\Domaine.csproj">
       <Project>{3753e396-f9f1-481d-9006-85ab5fef5c35}</Project>
       <Name>Domaine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{fd70b0bf-3d31-440f-8221-0fe0bb3f0fca}</Project>
-      <Name>Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

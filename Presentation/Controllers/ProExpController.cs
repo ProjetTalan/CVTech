@@ -76,8 +76,14 @@ namespace Presentation.Controllers
                 CompanyName = proExpModel.CompanyName,
                 FromDate = proExpModel.FromDate,
                 ToDate = proExpModel.ToDate,
-                ProfileTechModels = new List<ProfileTechModel>(await _proExpService.GetAllTechnoFrom(proExpModel))
+                ProfileTechModels = new List<ProfileTechModel>(await _proExpService.GetAllTechnoFrom(proExpModel)),
 	        };
+
+	        if (proExpModel.ExperienceDescriptionModel != null &&
+	            proExpModel.ExperienceDescriptionModel.Count > 0)
+	        {
+		        detailVm.ExperienceDescriptionModel = proExpModel.ExperienceDescriptionModel[0];
+	        }
 
 	        return View(detailVm);
         }
@@ -92,7 +98,8 @@ namespace Presentation.Controllers
         // POST: ProExp/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CompanyName, CityName, FromDate, ToDate")] CreateProExpViewModel proExpViewModel)
+        public async Task<ActionResult> Create(
+	        [Bind(Include = "CompanyName, CityName, FromDate, ToDate, ProExpDescription, ProExpName, ProExpPosition")] CreateProExpViewModel proExpViewModel)
         {
 	        if (ModelState.IsValid)
 	        {
@@ -102,10 +109,21 @@ namespace Presentation.Controllers
                     CityName = proExpViewModel.CityName,
                     FromDate = proExpViewModel.FromDate,
                     ToDate = proExpViewModel.ToDate,
-                    ProfileId = _userModel.Id
+                    ProfileId = _userModel.Id,
+					ExperienceDescriptionModel = new List<ExperienceDescriptionModel>()
                 };
 
-		        await _proExpService.CreateAsync(proExpToAdd);
+                var expProDesc = new ExperienceDescriptionModel
+                {
+	                Description = proExpViewModel.ProExpDescription,
+	                PositionDesc = proExpViewModel.ProExpPosition,
+	                Name = proExpViewModel.ProExpName
+                };
+
+                proExpToAdd.ExperienceDescriptionModel.Add(expProDesc);
+
+
+				await _proExpService.CreateAsync(proExpToAdd);
 		        return RedirectToAction("Index");
 	        }
 
