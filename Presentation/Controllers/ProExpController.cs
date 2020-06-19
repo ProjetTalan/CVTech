@@ -9,6 +9,7 @@ using System.Web.Security;
 using Application.Interface;
 using Application.Models;
 using Newtonsoft.Json;
+using Presentation.ViewModels.AdminViewModels;
 using Presentation.ViewModels.ProExpViewModels;
 
 namespace Presentation.Controllers
@@ -46,13 +47,38 @@ namespace Presentation.Controllers
 			    }
 		    }
         }
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sortOrder)
         {
-            var indexVm = new IndexProExpViewModel
+            ViewBag.CitySortParm = String.IsNullOrEmpty(sortOrder) ? "city_desc" : "";
+            ViewBag.CompanySortParm = String.IsNullOrEmpty(sortOrder) ? "company_desc" : "";
+            ViewBag.FromDateSortParm = sortOrder == "FromDate" ? "fromDate_desc" : "FromDate";
+			ViewBag.ToDateSortParm = sortOrder == "ToDate" ? "toDate_desc" : "ToDate";
+			var indexVm = new IndexProExpViewModel
             {
-                ProExpModels = new List<ProExpModel>(await _proExpService.GetAllProExpFrom(_userModel)) 
+                ProExpModels = new List<ProExpModel>(await _proExpService.GetAllProExpFrom(_userModel))
             };
-            return View(indexVm);
+			switch (sortOrder)
+            {
+                case "city_desc":
+                    indexVm.ProExpModels = indexVm.ProExpModels.OrderByDescending(s => s.CityName).ToList();
+                    break;
+                case "company_desc":
+                    indexVm.ProExpModels = indexVm.ProExpModels.OrderByDescending(s => s.CompanyName).ToList();
+                    break;
+                case "FromDate":
+                    indexVm.ProExpModels = indexVm.ProExpModels.OrderBy(s => s.FromDate).ToList();
+                    break;
+                case "fromDate_desc":
+                    indexVm.ProExpModels = indexVm.ProExpModels.OrderByDescending(s => s.FromDate).ToList();
+                    break;
+				case "ToDate":
+                    indexVm.ProExpModels = indexVm.ProExpModels.OrderBy(s => s.ToDate).ToList();
+                    break;
+                case "toDate_desc":
+                    indexVm.ProExpModels = indexVm.ProExpModels.OrderByDescending(s => s.ToDate).ToList();
+                    break;
+			}
+			return View(indexVm);
         }
 
         // GET: ProExp/Details/5
