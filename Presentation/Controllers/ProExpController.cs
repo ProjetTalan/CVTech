@@ -47,7 +47,7 @@ namespace Presentation.Controllers
 			    }
 		    }
         }
-        public async Task<ActionResult> Index(string sortOrder)
+        public async Task<ActionResult> Index(string sortOrder, string searchString)
         {
             ViewBag.CitySortParm = String.IsNullOrEmpty(sortOrder) ? "city_desc" : "";
             ViewBag.CompanySortParm = String.IsNullOrEmpty(sortOrder) ? "company_desc" : "";
@@ -57,6 +57,11 @@ namespace Presentation.Controllers
             {
                 ProExpModels = new List<ProExpModel>(await _proExpService.GetAllProExpFrom(_userModel))
             };
+            if (!String.IsNullOrEmpty(searchString))
+			{
+                indexVm.ProExpModels = indexVm.ProExpModels.Where(s => s.CityName.ToLower().Contains(searchString.ToLower())
+                                                                       || s.CompanyName.ToLower().Contains(searchString.ToLower())).ToList();
+            }
 			switch (sortOrder)
             {
                 case "city_desc":

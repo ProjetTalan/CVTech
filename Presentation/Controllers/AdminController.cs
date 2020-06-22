@@ -22,7 +22,7 @@ namespace Presentation.Controllers
 		    _profileService = profileService;
 	    }
 		// GET: Admin
-		public async Task<ActionResult> Index(string sortOrder)
+		public async Task<ActionResult> Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "";
@@ -32,7 +32,13 @@ namespace Presentation.Controllers
                 ProfileModels = new List<ProfileModel>(await _profileService.GetAllProfilesAsync())
 
             };
-            switch (sortOrder)
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                indexVm.ProfileModels = indexVm.ProfileModels.Where(s => s.LastName.ToLower().Contains(searchString.ToLower())
+                                                                         || s.FirstName.ToLower().Contains(searchString.ToLower())
+                                                                         || s.Email.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+			switch (sortOrder)
             {
                 case "name_desc":
                     indexVm.ProfileModels = indexVm.ProfileModels.OrderByDescending(s => s.LastName).ToList();
